@@ -134,4 +134,4 @@ PROMPT~>
 # AUTHORS
 
 [Damien Bernstein](https://github.com/DamienBernstein)
-[Tabitha Imafidon]https://github.com/Tabitht)
+[Tabitha Imafidon](https://github.com/Tabitht)
