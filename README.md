@@ -9,3 +9,9 @@ Is a command interpreter and the main purpose is to manage, manipulate and acces
  - Implement uuid module
  - args/kwargs
  - datetime
+
+# install
+``` git clone https://github.com/DamienBernstein/AirBnB_clone.git
+
+cd AirBnb_clone
+```
