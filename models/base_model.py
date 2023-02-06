@@ -37,3 +37,11 @@ class BaseModel:
             self.updated_at = datetime.now()
             # if it’s a new instance add a call to the method new(self) on stge
             models.storage.new(self)
+            
+     def __str__(self):
+        """ overriding the __str__ method that returns a custom
+        string object """
+        # Old-style: self.__class__.__name__
+        class_name = type(self).__name__
+        mssg = "[{0}] ({1}) {2}".format(class_name, self.id, self.__dict__)
+        return (mssg)
