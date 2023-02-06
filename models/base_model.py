@@ -52,4 +52,3 @@ class BaseModel:
         the current datetime """
         self.updated_at = datetime.now()
         models.storage.save()
-
