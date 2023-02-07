@@ -27,6 +27,6 @@ class FileStorage:
 
    
 
-    def new(self, obj):
+    
        
    
