@@ -25,11 +25,7 @@ class FileStorage:
                   "City": City, "Place": Place, "State": State,
                   "Review": Review}
 
-    def all(self):
-        """
-        Returns the dictionary of objects
-        """
-        return (self.__objects)
+   
 
     def new(self, obj):
         """
