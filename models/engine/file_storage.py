@@ -11,11 +11,7 @@ from models.place import Place
 from models.review import Review
 
 class FileStorage:
-    """
-    Class that serializes instances to a JSON file and deserializes
-    JSON file to instances
-    """
-
+ 
    
    
 
