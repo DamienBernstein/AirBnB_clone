@@ -17,16 +17,16 @@ class HBNBCommand(cmd.Cmd):
       level = ["BaseModel", "City", "State",
                "User", "Place", "Review", "Amenity"]
                
-     def do_EDF(self, args):
+      def do_EDF(self, args):
          """ CTRL-D to exit """
          print()
          return True
          
-     def do_quit(self, args):
+      def do_quit(self, args):
          """  Quit command to exit the program\n """
          return True
          
-     def emptyline(self):
+      def emptyline(self):
          """ Enter shouldnt execute anything """
          pass
 
