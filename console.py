@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
          """ Enter shouldnt execute anything """
          pass
 
-     def do_create(self, line):
+      def do_create(self, line):
           """
           Create a new instance of BaseModel.
           If class name is missing, prints "** class name missing **".
@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
               my_inst.save()
               print(my_inst.id)
             
-     def do_show(self, line):
+      def do_show(self, line):
           """
           Prints the string representation of an instance based on the class name and id.
           If class name is missing, prints "** class name missing **".
