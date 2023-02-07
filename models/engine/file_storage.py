@@ -16,15 +16,7 @@ class FileStorage:
     JSON file to instances
     """
 
-    # Define the file path for the JSON file
-    __file_path = "file.json"
-    # Dictionary to store the objects
-    __objects = {}
-    # Mapping of class names to their respective classes
-    class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
-                  "City": City, "Place": Place, "State": State,
-                  "Review": Review}
-
+   
    
 
     
