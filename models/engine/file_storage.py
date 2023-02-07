@@ -1,8 +1,7 @@
 #!/usr/bin/python3 
 
 
-
-
+""" Convert the dictionary representation to a JSON string """
 import json
 import os
 from models.base_model import BaseModel
