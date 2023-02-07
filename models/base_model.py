@@ -13,6 +13,7 @@ class BaseModel:
     Base class for other classes to inherit from 
     """
     def __init__(self, *args, **kwargs):
+        """ Initializes a new instance of the class. """
         # Generate a random UUID for each instance
         self.id = str(uuid.uuid4())
         # Set the created_at time to the current time
@@ -28,6 +29,7 @@ class BaseModel:
             models.storage.new(self)
     
     def _recreate_from_dict(self, data):
+        """ Helper function to recreate the instance from a dictionary. """
         # Iterate through each key-value pair in the data dictionary
         for key, value in data.items():
             # If the key is "updated_at", parse the string into a datetime object
@@ -42,23 +44,35 @@ class BaseModel:
 
             # Set the value of the attribute with the given key
             setattr(self, key, value)
+            
+    def __str__(self):
+        """
+        Overriding the built-in `__str__` method to return a custom string representation
+        of the object
+        """
+        # Get the name of the class as a string
+        class_name = type(self).__name__
+        # Use an f-string to build the string representation
+        return f"[{class_name}] ({self.id}) {self.__dict__}"
 
-  def __str__(self):
-    """
-    Overriding the built-in `__str__` method to return a custom string representation
-    of the object
-    """
-    # Get the name of the class as a string
-    class_name = type(self).__name__
-    # Use an f-string to build the string representation
-    return f"[{class_name}] ({self.id}) {self.__dict__}"
-
-
-   def save(self):
-    """
-    Save the current state of the object to the file
-    """
-    # Update the `updated_at` attribute with the current datetime
-    self.updated_at = datetime.now()
-    # Call the save method of the storage object to persist the changes
-    models.storage.save()
+    # Public instance methods
+    def save(self):
+        """
+        Save the current state of the object to the file
+        """
+        # Update the `updated_at` attribute with the current datetime
+        self.updated_at = datetime.now()
+        # Call the save method of the storage object to persist the changes
+        models.storage.save()
+    
+    def to_dict(self):
+        """
+        Returns a dictionary representation of the object's attributes.
+        """
+        # Initialize a dictionary to store the key-value pairs
+        tdic = {}
+        # Add the class name of the object to the dictionary
+        tdic["__class__"] = type(self).__name__
+        # Loop over the items in the object's __dict__
+        for attr_name, attr_value in self.__dict__.items():
+            # Check if the value is a dat
