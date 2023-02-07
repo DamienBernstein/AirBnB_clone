@@ -32,8 +32,5 @@ class FileStorage:
         Adds the object to the dictionary of objects using the key
         <class name>.<id of the object>
         """
-        if obj:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            self.__objects[key] = obj
-
+      
    
