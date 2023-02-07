@@ -28,9 +28,5 @@ class FileStorage:
    
 
     def new(self, obj):
-        """
-        Adds the object to the dictionary of objects using the key
-        <class name>.<id of the object>
-        """
-      
+       
    
