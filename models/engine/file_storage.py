@@ -54,20 +54,4 @@ class FileStorage:
             # Write the dictionary to the JSON file
             json.dump(ser_dict, f)
 
-    def reload(self):
-        """
-        Deserializes the JSON file to objects
-        Only if the JSON file exists, otherwise does nothing
-        """
-        # Check if the file exists
-        if os.path.isfile(self.__file_path):
-            with open(self.__file_path, 'r') as f:
-                # Load the JSON data from the file
-                des_json = json.load(f)
-                for key, value in des_json.items():
-                    # Split the key to separate class name and id
-                    class_name, obj_id = key.split('.')
-                    # Create the object using the class name and data
-                    obj = self.class_dict[class_name](**value)
-                    # Add the object to the __objects dictionary
-                    self.new(obj)
+    
