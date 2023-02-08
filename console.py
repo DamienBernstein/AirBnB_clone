@@ -2,7 +2,7 @@
 
 """ Program that contains the entry point of the command interpreter """
 import cmd
-from models.base_model import BaseModel
+from models.base_model import BaseModel  
 from models import storage
 
 class HBNBCommand(cmd.Cmd):
