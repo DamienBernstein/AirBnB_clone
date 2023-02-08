@@ -3,12 +3,6 @@
 """ Program that contains the entry point of the command interpreter """
 import cmd
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.amenity import Amenity
-from models.city import City
-from models.review import Review
-from models.place import Place
 from models import storage
 
 class HBNBCommand(cmd.Cmd):
@@ -129,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
                   storage.save()
 
 
-     def do_all(self, line):
+      def do_all(self, line):
           """
           Prints all string representation of all instances based or not on the class name.
           If class doesn't exist, prints "** class doesn't exist **".
@@ -155,7 +149,7 @@ class HBNBCommand(cmd.Cmd):
               print(obj_list)
 
             
-       def do_update(self, line):
+      def do_update(self, line):
           """Updates an instance based on the class name and id
           by adding or updating attribute (save the change into the JSON file)
           Usage: update <class name> <id> <attribute name> "<attribute value>"""
