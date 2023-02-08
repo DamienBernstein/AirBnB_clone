@@ -17,12 +17,11 @@ class HBNBCommand(cmd.Cmd):
           print()
           return True
       
-    def default(self, line):
-        """ Error message for when command not found in console """
-        print("Error: command not found:", line)
+      def default(self, line):
+          """ Error message for when command not found in console """
+          print("Error: command not found:", line)
 
-if __name__ == "__main__":
-    HBNBCommand().cmdloop()
+
     
       def do_quit(self, args):
           """ quit the program """
