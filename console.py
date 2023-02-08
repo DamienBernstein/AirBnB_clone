@@ -11,14 +11,15 @@ class HBNBCommand(cmd.Cmd):
       level = ["BaseModel", "City", "State",
                "User", "Place", "Review", "Amenity"]
                
-      def do_EDF(self, args):
-         """ CTRL-D to exit\n """
-         print()
-         return True
-         
-      def do_quit(self, args):
-         """  Quit command to exit the program\n """
-         return True
+      def do_EOF(self, args):
+          """ CTRL-D to exit """
+          print()
+          return True
+
+      def do_exit(self, args):
+          """ exit the program """
+          return True
+
          
       def emptyline(self):
          """ Enter shouldnt execute anything """
