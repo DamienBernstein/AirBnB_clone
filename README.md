@@ -135,4 +135,3 @@ PROMPT~>
 
 [Damien Bernstein](https://github.com/DamienBernstein)
 
-[Tabitha Imafidon](https://github.com/Tabitht)
