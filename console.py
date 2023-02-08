@@ -2,12 +2,9 @@
 """ Error message for when command not found in console """
 import cmd
 
-class MyConsole(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     def default(self, line):
         print("Error: command not found:", line)
-
-if __name__ == "__main__":
-    MyConsole().cmdloop()
 
 
 """ Program that contains the entry point of the command interpreter """
