@@ -77,7 +77,7 @@ class BaseModel:
         for attr_name, attr_value in self.__dict__.items():
              if isinstance(i, datetime):
                 tdic[n] = i.isoformat()
-            else:
+             else:
                 tdic[n] = i
         return (tdic)
 
