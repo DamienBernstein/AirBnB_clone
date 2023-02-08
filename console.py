@@ -153,6 +153,78 @@ class HBNBCommand(cmd.Cmd):
                   if n[0] in key:
                       obj_list.append(storage.all()[key].__str__())
               print(obj_list)
+            
+       def do_update(self, line):
+          """Updates an instance based on the class name and id
+          by adding or updating attribute (save the change into the JSON file)
+          Usage: update <class name> <id> <attribute name> "<attribute value>"""
+          n = line.split()
+          if len(n) == 0:
+              # Check if the class name is provided
+              print("** class name missing **")
+          elif (n[0] not in self.level):
+              # Check if the class exists
+              print("** class doesn't exist **")
+          elif len(n) == 1:
+              # Check if the instance id is provided
+              print("** instance id missing **")
+          else:
+              obj = storage.all()
+              key = "{}.{}".format(n[0], n[1])
+              if (key not in obj):
+                  # Check if the instance exists
+                  print("** no instance found **")
+              elif len(n) == 2:
+                  # Check if the attribute name is provided
+                  print("** attribute name missing **")
+              elif len(n) == 3:
+                  # Check if the value is provided
+                  print("** value missing **")
+              else:
+                  # Update the attribute value and save the change
+                  setattr(obj[key], n[2], n[3])
+                  storage.save()
+
+      def do_count(self, line):
+          """ retrieve the number of instances of a class """
+          count = 0
+          # Count the instances of the class
+          for key in storage.all().keys():
+              if line in key:
+                  count += 1
+          print(count)
+
+      def default(self, line):
+          """ Retrieve instances based on methods, i.e. <class name>.all() """
+          n = line.split('.')
+          inst = n[0]
+          # Check the method and call the appropriate function
+          if n[1] == "all()":
+              self.do_all(inst)
+          elif n[1] == "count()":
+              self.do_count(inst)
+          elif n[1].startswith('show'):
+              idsp = n[1].split('"')
+              line = inst + ' ' + idsp[1]
+              self.do_show(line)
+          elif n[1].startswith('destroy'):
+              idsp = n[1].split('"')
+              line = inst + ' ' + idsp[1]
+              self.do_destroy(line)
+          elif n[1].startswith('update'):
+              sp = n[1].split('"')
+              line = inst + ' ' + sp[1] + ' ' + sp[3] + ' ' + sp[5]
+              self.do_update(line)
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
+    # import sys
+    # non-interactive mode
+    # if len(sys.argv) > 1:
+    # Since onecmd () takes a single string as input
+    # the arguments of the program must be joined before passing them
+    # HBNBCommand().onecmd(' '.join(sys.argv[1:]))
+    # HBNBCommand().cmdloop()
 
        
             
