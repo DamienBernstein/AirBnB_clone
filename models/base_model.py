@@ -75,4 +75,4 @@ class BaseModel:
         tdic["__class__"] = type(self).__name__
         # Loop over the items in the object's __dict__
         for attr_name, attr_value in self.__dict__.items():
-            # Check if the value is a dat
+       
