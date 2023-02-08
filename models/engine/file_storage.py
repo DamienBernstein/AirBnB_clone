@@ -4,6 +4,7 @@
 """ Convert the dictionary representation to a JSON string """
 import json
 import os
+from models.user import User
 from models.base_model import BaseModel
 
 class FileStorage:
@@ -17,7 +18,7 @@ class FileStorage:
     # Dictionary to store the objects
     __objects = {}
     # Mapping of class names to their respective classes
-    class_dict = {"BaseModel": BaseModel}
+    class_dict = {"BaseModel": BaseModel, "User": User}
 
     def all(self):
         """
