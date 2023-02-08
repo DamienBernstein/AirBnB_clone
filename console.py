@@ -1,4 +1,14 @@
-#!/usr/bin/python3
+#!/usr/bin/python3 
+""" Error message for when command not found in console """
+import cmd
+
+class MyConsole(cmd.Cmd):
+    def default(self, line):
+        print("Error: command not found:", line)
+
+if __name__ == "__main__":
+    MyConsole().cmdloop()
+
 
 """ Program that contains the entry point of the command interpreter """
 import cmd
@@ -19,12 +29,7 @@ class HBNBCommand(cmd.Cmd):
       def do_quit(self, args):
           """ quit the program """
           return True
-      
-      def do_error(self, args):
-            """ error message when command not found """
-            print("command not found\n")
-            return True
-         
+     
       def emptyline(self):
          """ Enter shouldnt execute anything """
          pass
