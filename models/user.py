@@ -9,4 +9,3 @@ class User(BaseModel):
       Last_name = ''
       email = ''
       password = ''
-      
