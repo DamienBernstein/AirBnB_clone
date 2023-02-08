@@ -17,9 +17,7 @@ class FileStorage:
     # Dictionary to store the objects
     __objects = {}
     # Mapping of class names to their respective classes
-    class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
-                  "City": City, "Place": Place, "State": State,
-                  "Review": Review}
+    class_dict = {"BaseModel": BaseModel}
 
     def all(self):
         """
