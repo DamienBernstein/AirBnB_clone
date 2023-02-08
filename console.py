@@ -89,6 +89,71 @@ class HBNBCommand(cmd.Cmd):
                   obj = storage.all()
                   # Print the string representation of the instance with class name and id
                   print(obj[key])
+                  
+      def do_destroy(self, line):
+          """
+          Deletes an instance based on the class name and id.
+          If class name is missing, prints "** class name missing **".
+          If class doesn't exist, prints "** class doesn't exist **".
+          If instance id is missing, prints "** instance id missing **".
+          If instance doesn't exist, prints "** no instance found **".
+          """
+          n = line.split()
+
+          # Check if class name is missing
+          if not line:
+              print("** class name missing **")
+              return None
+
+          # Check if class exists
+          elif n[0] not in self.level:
+              print("** class doesn't exist **")
+              return None
+
+          # Check if instance id is missing
+          elif len(n) == 1:
+              print("** instance id missing **")
+              return None
+
+          # Delete the instance
+          else:
+              # Concatenate class_name and id with a dot
+              key = "{}.{}".format(n[0], n[1])
+              # Search for the key in the storage
+              if key not in storage.all().keys():
+                  print("** no instance found **")
+              else:
+                  # Delete the instance
+                  del storage.all()[key]
+                  # Save the changes in the storage
+                  storage.save()
+
+
+      def do_all(self, line):
+          """
+          Prints all string representation of all instances based or not on the class name.
+          If class doesn't exist, prints "** class doesn't exist **".
+          """
+          n = line.split()
+          obj_list = []
+
+          # Print all instances if class name is not provided
+          if len(n) == 0:
+              for value in storage.all().values():
+                  obj_list.append(value.__str__())
+              print(obj_list)
+
+          # Check if class exists
+          elif n[0] not in self.level:
+              print("** class doesn't exist **")
+
+          # Print all instances of the provided class name
+          else:
+              for key, value in storage.all().items():
+                  if n[0] in key:
+                      obj_list.append(storage.all()[key].__str__())
+              print(obj_list)
+
        
             
 
