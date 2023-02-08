@@ -1,10 +1,4 @@
 #!/usr/bin/python3 
-""" Error message for when command not found in console """
-import cmd
-
-class HBNBCommand(cmd.Cmd):
-    def default(self, line):
-        print("Error: command not found:", line)
 
 
 """ Program that contains the entry point of the command interpreter """
@@ -22,7 +16,14 @@ class HBNBCommand(cmd.Cmd):
           """ CTRL-D to exit """
           print()
           return True
+      
+    def default(self, line):
+        """ Error message for when command not found in console """
+        print("Error: command not found:", line)
 
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
+    
       def do_quit(self, args):
           """ quit the program """
           return True
