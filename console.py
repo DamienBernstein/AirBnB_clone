@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
                   storage.save()
 
 
-      def do_all(self, line):
+     def do_all(self, line):
           """
           Prints all string representation of all instances based or not on the class name.
           If class doesn't exist, prints "** class doesn't exist **".
@@ -153,6 +153,7 @@ class HBNBCommand(cmd.Cmd):
                   if n[0] in key:
                       obj_list.append(storage.all()[key].__str__())
               print(obj_list)
+
             
        def do_update(self, line):
           """Updates an instance based on the class name and id
@@ -225,11 +226,3 @@ if __name__ == '__main__':
     # the arguments of the program must be joined before passing them
     # HBNBCommand().onecmd(' '.join(sys.argv[1:]))
     # HBNBCommand().cmdloop()
-
-       
-            
-
-            
-
-         
-     
