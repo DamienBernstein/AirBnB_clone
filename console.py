@@ -2,6 +2,7 @@
 
 """ Program that contains the entry point of the command interpreter """
 import cmd
+from models.base_model import BaseModel
 from models import storage
 
 class HBNBCommand(cmd.Cmd):
@@ -11,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
                "User", "Place", "Review", "Amenity"]
                
       def do_EDF(self, args):
-         """ CTRL-D to exit """
+         """ CTRL-D to exit\n """
          print()
          return True
          
