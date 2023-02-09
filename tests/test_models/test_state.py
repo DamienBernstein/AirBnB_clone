@@ -14,7 +14,7 @@ class TestState(unittest.TestCase):
     # Setup method for class level fixtures
     @classmethod
     def setUpClass(cls):
-        self.assertIsInstance(str(self.my_user.created_at), str)
+        cls.assertIsInstance(str(cls.my_user.created_at), str)
         cls.state1.name = "los Durba"
 
     # Tear down method for class level fixtures
