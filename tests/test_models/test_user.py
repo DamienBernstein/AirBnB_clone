@@ -14,9 +14,9 @@ class TestUser(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.my_user = User()
-        cls.my_user.first_name = "Neil"
-        cls.my_user.last_name = "Armstrong"
-        cls.my_user.email = "nasa@nasa.gov"
+        cls.my_user.first_name = "John"
+        cls.my_user.last_name = "Peterstone"
+        cls.my_user.email = "josto@jesto.lov"
         cls.my_user.password = "root"
 
     # Tear down method that runs after each test case
