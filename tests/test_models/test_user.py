@@ -52,12 +52,14 @@ class TestUser(unittest.TestCase):
         self.assertIn("updated_at", self.my_user.__dict__)
         self.assertIn("id", self.my_user.__dict__)
 
+   
     # Test the types of the attributes of the User model
-    def test_strings(self):
-        """
-        This method tests if the name attribute is a string
-        """
-        self.assertEqual(type(self.state1.name), str)
+    def test_types(self):
+        self.assertIsInstance(self.my_user.email, str)
+        self.assertIsInstance(self.my_user.password, str)
+        self.assertIsInstance(self.my_user.first_name, str)
+        self.assertIsInstance(self.my_user.last_name, str)
+
 
 
 # Run the tests if this script is executed as main
