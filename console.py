@@ -27,13 +27,13 @@ class HBNBCommand(cmd.Cmd):
         return [str(instance) for instance in Hbnb.all_instances[cls]]
 
     # Override the default constructor of the cmd.Cmd class
-    def __init__(self):
-        """
-        Initialize the Hbnb class
-        """
-        super().__init__()
-        self.prompt = '(hbnb) '
-               
+      def __init__(self):
+          """
+             Initialize the Hbnb class
+              """
+              super().__init__()
+              self.prompt = '(hbnb) '
+
       def do_EOF(self, args):
           """ CTRL-D to exit """
           print()
