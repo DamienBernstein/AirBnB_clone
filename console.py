@@ -14,11 +14,11 @@ class HBNBCommand(cmd.Cmd):
                "User", "Place", "Review", "Amenity"]
       
       # Define a class variable to store all instances of all classes
-    all_instances = {}
+      all_instances = {}
 
     # Define a method to retrieve all instances of a class
-    @staticmethod
-    def retrieve_all(cls):
+      @staticmethod
+      def retrieve_all(cls):
         """
         Retrieve all instances of a class
         """
@@ -31,8 +31,8 @@ class HBNBCommand(cmd.Cmd):
           """
              Initialize the Hbnb class
               """
-              super().__init__()
-              self.prompt = '(hbnb) '
+          super().__init__()
+          self.prompt = '(hbnb) '
 
       def do_EOF(self, args):
           """ CTRL-D to exit """
