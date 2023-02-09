@@ -14,7 +14,7 @@ class test_Amenity(unittest.TestCase):
     @classmethod
     def setup(self):
         self.state1 = State()
-        self.state1.name = "Monte Gagazet"
+        self.state1.name = " "
 
     @classmethod
     def tearDown(self):
