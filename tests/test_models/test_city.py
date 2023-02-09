@@ -6,50 +6,57 @@
 
 import unittest
 import os
-from models.user import User
+from models.city import City
 from models.base_model import BaseModel
 
-
-class test_Amenity(unittest.TestCase):
-
-    @classmethod
-    def setup(self):
-        self.city1 = City()
-        self.city1.name = "Zanarkand"
-        self.city1.state_id = "Spira"
+class TestCity(unittest.TestCase):
+    """Test class for the City model"""
 
     @classmethod
-    def tearDown(self):
-        del self.city1
+    def setUpClass(cls):
+        """Setup class method to create an instance of City"""
+        cls.city1 = City()
+        cls.city1.name = "lalalanda"
+        cls.city1.state_id = "tria"
+
+    @classmethod
+    def tearDownClass(cls):
+        """Teardown class method to delete the instance and remove the file"""
+        del cls.city1
         try:
             os.remove("file.json")
         except FileNotFoundError:
             pass
 
-    def test_to_dict(self):
-        self.assertEqual("to_dict" in dir(self.city1), True)
+    def test_to_dict_method(self):
+        """Test to check if the to_dict method exists"""
+        self.assertIn("to_dict", dir(self.city1))
 
-    def test_functions(self):
+    def test_docstring(self):
+        """Test to check if the class has a docstring"""
         self.assertIsNotNone(City.__doc__)
 
-    def save_test(self):
+    def test_save_method(self):
+        """Test to check if the save method updates the updated_at attribute"""
         self.city1.save()
-        self.assertNotEqual(self.city1.created_at,
-                            self.city1.updated_at)
+        self.assertNotEqual(self.city1.created_at, self.city1.updated_at)
 
     def test_subclass(self):
-        self.assertTrue(issubclass(self.city1.__class__.BaseModel), True)
+        """Test to check if the City class is a subclass of BaseModel"""
+        self.assertTrue(issubclass(City, BaseModel))
 
     def test_attributes(self):
-        self.assertTrue("name" in self.city1.__dict__)
-        self.assertTrue("created_at" in self.city1.__dict__)
-        self.assertTrue("updated_at" in self.city1.__dict__)
-        self.assertTrue("id" in self.city1.__dict__)
-        self.assertTrue("state_id" in self.city1.__dict__)
+        """Test to check if the city has the expected attributes"""
+        self.assertIn("name", self.city1.__dict__)
+        self.assertIn("created_at", self.city1.__dict__)
+        self.assertIn("updated_at", self.city1.__dict__)
+        self.assertIn("id", self.city1.__dict__)
+        self.assertIn("state_id", self.city1.__dict__)
 
-    def test_strings(self):
-        self.assertEqual(type(self.city1.name), str)
-        self.assertEqual(type(self.city1.state_id), str)
+    def test_string_attributes(self):
+        """Test to check if the name and state_id attributes are strings"""
+        self.assertIsInstance(self.city1.name, str)
+        self.assertIsInstance(self.city1.state_id, str)
 
 if __name__ == "__main__":
     unittest.main()
