@@ -14,24 +14,24 @@ class HBNBCommand(cmd.Cmd):
                "User", "Place", "Review", "Amenity"]
       
     # Define a class variable to store all instances of all classes
-    all_instances = {}
+      all_instances = {}
 
     # Define a method to retrieve all instances of a class
-    @staticmethod
-    def retrieve_all(cls):
-        """
-        Retrieve all instances of a class
-        """
-        if cls not in HBNBCommand.all_instances:
-           HBNBCommand.all_instances[cls] = []
-        return [str(instance) for instance in HBNBCommand.all_instances[cls]]
+      @staticmethod
+      def retrieve_all(cls):
+          """
+          Retrieve all instances of a class
+          """
+          if cls not in HBNBCommand.all_instances:
+             HBNBCommand.all_instances[cls] = []
+          return [str(instance) for instance in HBNBCommand.all_instances[cls]]
 
     # Override the default constructor of the cmd.Cmd class
-    def __init__(self):
-        """
+      def __init__(self):
+          """
            Initialize the Hbnb class
-        """
-        super().__init__()
+          """
+          super().__init__()
 
 
       def do_EOF(self, args):
