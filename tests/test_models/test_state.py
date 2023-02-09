@@ -14,7 +14,7 @@ class TestState(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.state1 = State()
-        cls.state1.name = "Monte Gagazet"
+        cls.state1.name = "los Durba"
 
     # Tear down method for class level fixtures
     @classmethod
