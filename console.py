@@ -12,6 +12,27 @@ class HBNBCommand(cmd.Cmd):
       prompt = "(hbnb)"
       level = ["BaseModel", "City", "State",
                "User", "Place", "Review", "Amenity"]
+      
+      # Define a class variable to store all instances of all classes
+    all_instances = {}
+
+    # Define a method to retrieve all instances of a class
+    @staticmethod
+    def retrieve_all(cls):
+        """
+        Retrieve all instances of a class
+        """
+        if cls not in Hbnb.all_instances:
+            Hbnb.all_instances[cls] = []
+        return [str(instance) for instance in Hbnb.all_instances[cls]]
+
+    # Override the default constructor of the cmd.Cmd class
+    def __init__(self):
+        """
+        Initialize the Hbnb class
+        """
+        super().__init__()
+        self.prompt = '(hbnb) '
                
       def do_EOF(self, args):
           """ CTRL-D to exit """
