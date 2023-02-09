@@ -6,6 +6,12 @@ import json
 import os
 from models.user import User
 from models.base_model import BaseModel
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class FileStorage:
     """
@@ -18,7 +24,9 @@ class FileStorage:
     # Dictionary to store the objects
     __objects = {}
     # Mapping of class names to their respective classes
-    class_dict = {"BaseModel": BaseModel, "User": User}
+    class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
+                  "City": City, "Place": Place, "State": State,
+                  "Review": Review}
 
     def all(self):
         """
