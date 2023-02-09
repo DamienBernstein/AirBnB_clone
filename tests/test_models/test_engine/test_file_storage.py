@@ -22,9 +22,9 @@ class TestFileStorage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.review = Review()
-        cls.review.user_id = "Tidus"
-        cls.review.place_id = "Zanarkand"
-        cls.review.text = "See you again next time"
+        cls.review.user_id = "tim"
+        cls.review.place_id = "lalanda"
+        cls.review.text = "I'll be back"
 
     # teardown method to delete the review object and remove the file.json file
     # after all tests have run
