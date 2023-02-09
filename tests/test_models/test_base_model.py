@@ -3,9 +3,10 @@
 """Unittest BaseModel"""
 
 import unittest
+import os
 import uuid
+from models.base_model import BaseModel
 from datetime import datetime
-from models import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     def test_init(self):
