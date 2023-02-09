@@ -65,19 +65,18 @@ class BaseModel:
         # Call the save method of the storage object to persist the changes
         models.storage.save()
     
-    def to_dict(self):
-        """
-        Returns a dictionary representation of the object's attributes.
-        """
-        # Initialize a dictionary to store the key-value pairs
-        tdic = {}
-        # Add the class name of the object to the dictionary
-        tdic["__class__"] = type(self).__name__
-        # Loop over the items in the object's __dict__
-        for attr_name, attr_value in self.__dict__.items():
+     def to_dict(self):
+         """returns a dictionary containing all keys/values
+         of __dict__ of the instance."""
+         # Define a dictionary and key __class__ that add to this dictionary
+         # with the class name of the object
+         tdic = {}
+         tdic["__class__"] = type(self).__name__
+         # loop over dict items and validate created_at and updated_at to
+         # convert in ISO format
+         for n, i in self.__dict__.items():
              if isinstance(i, datetime):
-                tdic[n] = i.isoformat()
+                 tdic[n] = i.isoformat()
              else:
-                tdic[n] = i
-        return (tdic)
-
+                 tdic[n] = i
+         return (tdic)
