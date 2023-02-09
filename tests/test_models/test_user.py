@@ -53,7 +53,7 @@ class TestUser(unittest.TestCase):
         self.assertIn("id", self.my_user.__dict__)
 
     # Test the types of the attributes of the User model
-    def test_types(self):
+    def test_strings(self):
         self.assertIsInstance(self.my_user.created_at, str)
         self.assertIsInstance(self.my_user.updated_at, str)
         self.assertIsInstance(self.my_user.email, str)
