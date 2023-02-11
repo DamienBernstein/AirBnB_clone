@@ -71,7 +71,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """
-        Prints the string representation of an instance based on the class name and id.
+        Prints the string representation of an 
+        instance based on the class name and id.
         If class name is missing, prints "** class name missing **".
         If class doesn't exist, prints "** class doesn't exist **".
         If instance id is missing, prints "** instance id missing **".
@@ -146,7 +147,8 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
         def do_all(self, line):
-            """Prints all string representation of all instances based or not on the class name.
+            """Prints all string representation of all
+            instances based or not on the class name.
             If class doesn't exist, prints "** class doesn't exist **".
             """
             n = line.split()
