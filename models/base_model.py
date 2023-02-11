@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-"""Base module."""
+
+""" Base module """
 import uuid
 from datetime import datetime
+# import the variable storage
 import models
 
 
@@ -22,9 +24,9 @@ class BaseModel:
         """Helper function to recreate the instance from a dictionary."""
         for key, value in data.items():
             if key == "updated_at":
-                value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                value = datetime.fromisoformat(value)
             elif key == "created_at":
-                value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                value = datetime.fromisoformat(value)
             elif key == "__class__":
                 continue
 
@@ -41,8 +43,7 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """Return a dictionary containing all keys/
-        values of __dict__ of the instance."""
+        """Return a dictionary containing all keys/values of __dict__ of the instance."""
         tdic = {}
         tdic["__class__"] = type(self).__name__
         for n, i in self.__dict__.items():
