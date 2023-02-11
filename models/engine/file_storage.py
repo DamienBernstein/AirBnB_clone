@@ -27,6 +27,13 @@ class FileStorage:
     class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
                   "City": City, "Place": Place, "State": State,
                   "Review": Review}
+    
+        @classmethod
+    def get_file_path(cls):
+        return cls.__file_path
+    
+    def __init__(self):
+        self.__objects = {}
 
     def all(self):
         """
@@ -48,8 +55,8 @@ class FileStorage:
         Serializes the objects to the JSON file defined by __file_path
         """
         ser_dict = {}
-        all_dict = FileStorage.__objects
-        with open(FileStorage.__file_path, 'w') as f:
+        all_dict = self.__objects
+        with open(FileStorage.get_file_path(), 'w') as f:
             # Convert each object to a dictionary
             for value in all_dict.values():
                 key = "{}.{}".format(value.__class__.__name__, value.id)
@@ -57,20 +64,22 @@ class FileStorage:
             # Write the dictionary to the JSON file
             json.dump(ser_dict, f)
 
+
     def reload(self):
         """
         Deserializes the JSON file to objects
         Only if the JSON file exists, otherwise does nothing
         """
         # Check if the file exists
-        if os.path.isfile(self.__file_path):
-            with open(self.__file_path, 'r') as f:
+        if os.path.isfile(FileStorage.get_file_path()):
+            with open(FileStorage.get_file_path(), 'r') as f:
                 # Load the JSON data from the file
                 des_json = json.load(f)
                 for key, value in des_json.items():
                     # Split the key to separate class name and id
                     class_name, obj_id = key.split('.')
                     # Create the object using the class name and data
-                    obj = self.class_dict[class_name](**value)
+                    obj = FileStorage.class_dict[class_name](**value)
                     # Add the object to the __objects dictionary
-                    self.new(obj)
+                    self.add_object(obj)
+
