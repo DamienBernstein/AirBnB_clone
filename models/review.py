@@ -3,8 +3,8 @@
 from . base_model import BaseModel
 
 
-class Review(BaseModel):
-    """ review of the user (qualification) """ 
+class Review (BaseModel):
+    """ review of the user (qualification) """
     place_id =''
     user_id = ''
     text = ''
