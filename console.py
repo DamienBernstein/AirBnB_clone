@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 """ Program that contains the entry point of the command interpreter """
 import cmd
 from models.base_model import BaseModel
@@ -69,6 +68,7 @@ class HBNBCommand(cmd.Cmd):
             my_inst.save()
             print(my_inst.id)
 
+  
     def do_show(self, line):
         """
         Prints the string representation of an
