@@ -14,10 +14,10 @@ class HBNBCommand(cmd.Cmd):
     level = ["BaseModel", "City", "State",
              "User", "Place", "Review", "Amenity"]
 
-  # Define a class variable to store all instances of all classes
+    # Define a class variable to store all instances of all classes
     all_instances = {}
 
-  # Define a method to retrieve all instances of a class
+    # Define a method to retrieve all instances of a class
     @staticmethod
     def retrieve_all(cls):
         """
@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
             HBNBCommand.all_instances[cls] = []
         return [str(instance) for instance in HBNBCommand.all_instances[cls]]
 
-  # Override the default constructor of the cmd.Cmd class
+    # Override the default constructor of the cmd.Cmd class
     def __init__(self):
         """
          Initialize the Hbnb class
@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """
-        Prints the string representation of an 
+        Prints the string representation of an
         instance based on the class name and id.
         If class name is missing, prints "** class name missing **".
         If class doesn't exist, prints "** class doesn't exist **".
