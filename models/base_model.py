@@ -41,7 +41,8 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """Return a dictionary containing all keys/values of __dict__ of the instance."""
+        """Return a dictionary containing all keys/
+        values of __dict__ of the instance."""
         tdic = {}
         tdic["__class__"] = type(self).__name__
         for n, i in self.__dict__.items():
