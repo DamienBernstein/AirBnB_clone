@@ -28,6 +28,14 @@ class FileStorage:
                   "City": City, "Place": Place, "State": State,
                   "Review": Review}
     
+    def add_object(self, obj):
+        """
+        Adds an object to the __objects dictionary
+        """
+        key = obj.__class__.__name__ + "." + obj.id
+        self.__objects[key] = obj
+
+    
     @classmethod
     def get_file_path(cls):
         return cls.__file_path
