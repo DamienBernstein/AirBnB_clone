@@ -1,82 +1,52 @@
 #!/usr/bin/python3
 
-
-""" Base module """
+"""Base module."""
 import uuid
 from datetime import datetime
-# import the variable storage
 import models
 
 
 class BaseModel:
-    """ 
-    Base class for other classes to inherit from 
-    """
+    """Base class for other classes to inherit from."""
     def __init__(self, *args, **kwargs):
-        """ Initializes a new instance of the class. """
-        # Generate a random UUID for each instance
+        """Initializes a new instance of the class."""
         self.id = str(uuid.uuid4())
-        # Set the created_at time to the current time
         self.created_at = datetime.now()
-        # Set the updated_at time to the current time
         self.updated_at = datetime.now()
 
-        # If kwargs is not empty (i.e. there are additional attributes)
         if kwargs:
-            # Call the helper function to recreate the instance from the kwargs
             self._recreate_from_dict(kwargs)
-            # Add the instance to the storage
             models.storage.new(self)
-    
+
     def _recreate_from_dict(self, data):
-        """ Helper function to recreate the instance from a dictionary. """
-        # Iterate through each key-value pair in the data dictionary
+        """Helper function to recreate the instance from a dictionary."""
         for key, value in data.items():
-            # If the key is "updated_at", parse the string into a datetime object
             if key == "updated_at":
                 value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-            # If the key is "created_at", parse the string into a datetime object
             elif key == "created_at":
                 value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-            # If the key is "__class__", skip it
             elif key == "__class__":
                 continue
 
-            # Set the value of the attribute with the given key
             setattr(self, key, value)
-            
+
     def __str__(self):
-        """
-        Overriding the built-in `__str__` method to return a custom string representation
-        of the object
-        """
-        # Get the name of the class as a string
+        """Return a custom string representation of the object."""
         class_name = type(self).__name__
-        # Use an f-string to build the string representation
         return f"[{class_name}] ({self.id}) {self.__dict__}"
 
-    # Public instance methods
     def save(self):
-        """
-        Save the current state of the object to the file
-        """
-        # Update the `updated_at` attribute with the current datetime
+        """Save the current state of the object to the file."""
         self.updated_at = datetime.now()
-        # Call the save method of the storage object to persist the changes
         models.storage.save()
-    
+
     def to_dict(self):
-         """returns a dictionary containing all keys/values
-         of __dict__ of the instance."""
-         # Define a dictionary and key __class__ that add to this dictionary
-         # with the class name of the object
-         tdic = {}
-         tdic["__class__"] = type(self).__name__
-         # loop over dict items and validate created_at and updated_at to
-         # convert in ISO format
-         for n, i in self.__dict__.items():
-             if isinstance(i, datetime):
-                 tdic[n] = i.isoformat()
-             else:
-                 tdic[n] = i
-         return (tdic)
+        """Return a dictionary containing all keys/values of __dict__ of the instance."""
+        tdic = {}
+        tdic["__class__"] = type(self).__name__
+        for n, i in self.__dict__.items():
+            if isinstance(i, datetime):
+                tdic[n] = i.isoformat()
+            else:
+                tdic[n] = i
+        return tdic
