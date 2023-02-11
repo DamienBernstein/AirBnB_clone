@@ -4,8 +4,8 @@
 """ Convert the dictionary representation to a JSON string """
 import json
 import os
-from models.user import User
 from models.base_model import BaseModel
+from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
@@ -14,80 +14,46 @@ from models.review import Review
 
 
 class FileStorage:
-    """
-    Class that serializes instances to a JSON file and deserializes
-    JSON file to instances
-    """
-
-    # Define the file path for the JSON file
+    """ serializes instances to a JSON file and deserializes
+    JSON file to instances """
     __file_path = "file.json"
-    # Dictionary to store the objects
     __objects = {}
-    # Mapping of class names to their respective classes
-    class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
+    lavel_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
                   "City": City, "Place": Place, "State": State,
                   "Review": Review}
-    
-    def add_object(self, obj):
-        """
-        Adds an object to the __objects dictionary
-        """
-        key = obj.__class__.__name__ + "." + obj.id
-        self.__objects[key] = obj
-
-    
-    @classmethod
-    def get_file_path(cls):
-        return cls.__file_path
-    
-    def __init__(self):
-        self.__objects = {}
 
     def all(self):
-        """
-        Returns the dictionary of objects
-        """
+        """ returns the dictionary __objects """
         return (self.__objects)
 
     def new(self, obj):
-        """
-        Adds the object to the dictionary of objects using the key
-        <class name>.<id of the object>
-        """
+        """ sets in __objects the obj with key <obj class name>.id """
         if obj:
             key = "{}.{}".format(obj.__class__.__name__, obj.id)
             self.__objects[key] = obj
 
     def save(self):
-        """
-        Serializes the objects to the JSON file defined by __file_path
-        """
+        """ serializes __objects to the JSON file (path: __file_path) """
         ser_dict = {}
-        all_dict = self.__objects
-        with open(FileStorage.get_file_path(), 'w') as f:
-            # Convert each object to a dictionary
+        all_dict = FileStorage.__objects
+        with open(FileStorage.__file_path, 'w') as f:
             for value in all_dict.values():
                 key = "{}.{}".format(value.__class__.__name__, value.id)
                 ser_dict[key] = value.to_dict()
-            # Write the dictionary to the JSON file
             json.dump(ser_dict, f)
 
-
     def reload(self):
-        """
-        Deserializes the JSON file to objects
-        Only if the JSON file exists, otherwise does nothing
-        """
-        # Check if the file exists
-        if os.path.isfile(FileStorage.get_file_path()):
-            with open(FileStorage.get_file_path(), 'r') as f:
-                # Load the JSON data from the file
+        """ deserializes the JSON file to __objects (only if the JSON file
+        (__file_path) exists, otherwise, do nothing. If the file doesn’t
+        exist, no exception should be raised) """
+        # Validate if file exists
+        if os.path.isfile(self.__file_path):
+            with open(self.__file_path, 'r') as f:
                 des_json = json.load(f)
                 for key, value in des_json.items():
-                    # Split the key to separate class name and id
-                    class_name, obj_id = key.split('.')
-                    # Create the object using the class name and data
-                    obj = FileStorage.class_dict[class_name](**value)
-                    # Add the object to the __objects dictionary
-                    self.add_object(obj)
-
+                    # Separate name_class from id and split the separator
+                    k = key.split('.')
+                    # search "__class__": "BaseModel"
+                    class_name = k[0]
+                    # set in __objects the key, value
+                    self.new(eval("{}".format(class_name))(**value))
