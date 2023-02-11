@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-
-
-""" Convert the dictionary representation to a JSON string """
 import json
 import os
+
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -14,46 +12,43 @@ from models.review import Review
 
 
 class FileStorage:
-    """ serializes instances to a JSON file and deserializes
-    JSON file to instances """
-    __file_path = "file.json"
-    __objects = {}
-    lavel_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
-                  "City": City, "Place": Place, "State": State,
-                  "Review": Review}
+    FILE_PATH = "file.json"
+    OBJECTS = {}
+    LABEL_DICT = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Amenity": Amenity,
+        "City": City,
+        "Place": Place,
+        "State": State,
+        "Review": Review
+    }
 
     def all(self):
-        """ returns the dictionary __objects """
-        return (self.__objects)
+        return self.OBJECTS
 
     def new(self, obj):
-        """ sets in __objects the obj with key <obj class name>.id """
         if obj:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            self.__objects[key] = obj
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            self.OBJECTS[key] = obj
 
     def save(self):
-        """ serializes __objects to the JSON file (path: __file_path) """
-        ser_dict = {}
-        all_dict = FileStorage.__objects
-        with open(FileStorage.__file_path, 'w') as f:
-            for value in all_dict.values():
-                key = "{}.{}".format(value.__class__.__name__, value.id)
-                ser_dict[key] = value.to_dict()
-            json.dump(ser_dict, f)
+        serialized_dict = {}
+        for value in self.OBJECTS.values():
+            key = "{}.{}".format(type(value).__name__, value.id)
+            serialized_dict[key] = value.to_dict()
+        
+        with open(self.FILE_PATH, 'w') as f:
+            json.dump(serialized_dict, f)
 
     def reload(self):
-        """ deserializes the JSON file to __objects (only if the JSON file
-        (__file_path) exists, otherwise, do nothing. If the file doesn’t
-        exist, no exception should be raised) """
-        # Validate if file exists
-        if os.path.isfile(self.__file_path):
-            with open(self.__file_path, 'r') as f:
-                des_json = json.load(f)
-                for key, value in des_json.items():
-                    # Separate name_class from id and split the separator
-                    k = key.split('.')
-                    # search "__class__": "BaseModel"
-                    class_name = k[0]
-                    # set in __objects the key, value
-                    self.new(eval("{}".format(class_name))(**value))
+        if os.path.isfile(self.FILE_PATH):
+            with open(self.FILE_PATH, 'r') as f:
+                deserialized_json = json.load(f)
+                for key, value in deserialized_json.items():
+                    class_name, _, obj_id = key.rpartition('.')
+                    cls = self.LABEL_DICT.get(class_name)
+                    if cls:
+                        obj = cls(**value)
+                        obj.id = obj_id
+                        self.new(obj)
