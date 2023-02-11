@@ -3,6 +3,7 @@
 """City where users come from"""
 from .base_model import BaseModel
 
+
 class City(BaseModel):
     """City of the user"""
     name = ""
