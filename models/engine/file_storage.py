@@ -28,7 +28,7 @@ class FileStorage:
                   "City": City, "Place": Place, "State": State,
                   "Review": Review}
     
-        @classmethod
+    @classmethod
     def get_file_path(cls):
         return cls.__file_path
     
