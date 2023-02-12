@@ -17,8 +17,8 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
     class_map = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
-                  "City": City, "Place": Place, "State": State,
-                  "Review": Review}
+                 "City": City, "Place": Place, "State": State,
+                 "Review": Review}
 
     def all(self):
         """Returns the dictionary __objects"""
@@ -41,7 +41,7 @@ class FileStorage:
             json.dump(ser_dict, f)
 
     def reload(self):
-        """Deserializes the JSON file to __objects (only if the JSON file (__file_path) exists, 
+        """Deserializes the JSON file to __objects (only if the JSON file (__file_path) exists,
         otherwise, do nothing. If the file doesn’t exist, no exception should be raised)"""
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r') as f:
