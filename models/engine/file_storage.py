@@ -20,8 +20,9 @@ class FileStorage:
 
     def new(self, cls, obj):
         key = cls.__name__ + "." + obj.id
-        FileStorage.__objects[key] = obj
+        models.storage.new(self.__class__.__name__, self)
 
+      
 
     def save(self):
         with open(FileStorage.__file_path, 'w') as f:
