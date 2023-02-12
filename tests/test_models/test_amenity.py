@@ -8,6 +8,7 @@ import os
 from models.amenity import Amenity
 from models.base_model import BaseModel
 
+
 # class to test the Amenity class
 class TestAmenity(unittest.TestCase):
 
