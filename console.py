@@ -12,28 +12,13 @@ from models.engine.file_storage import FileStorage
 from models import storage
 
 
+
 class HBNBCommand(cmd.Cmd):
     """ init Command Prompt """
     prompt = "(hbnb) "
     level = ["BaseModel", "City", "State",
              "User", "Place", "Review", "Amenity"]
-
-    def do_create(self, line):
-        if line == "BaseModel":
-            new_instance = BaseModel()
-        elif line == "User":
-            new_instance = User()
-        new_instance.save()
-        print(new_instance.id)
-
-def do_show(self, line):
-    try:
-        class_name, obj_id = line.split()
-        obj = storage.all()[class_name + "." + obj_id]
-        print(obj)
-    except:
-        print("Error: no instance found")
-
+)
 
     def do_EOF(self, args):
         """CTRl-D to exit\n"""
@@ -49,19 +34,24 @@ def do_show(self, line):
         pass
 
     def do_create(self, line):
-        """Create a new instance of BaseModel"""
-        if not line:
-            print("** class name missing **")
-            return None
-        elif (line not in self.level):
-            print("** class doesn't exist **")
-            return None
-        else:
-            my_inst = eval(line + "()")
-            my_inst.save()
-            print(my_inst.id)
-
-    def do_show(self, line):
+        if line == "BaseModel":
+            new_instance = BaseModel()
+        elif line == "User":
+            new_instance = User()
+        elif line == "Place":
+            new_instance = Place()
+        elif line == "State":
+            new_instance = State()
+        elif line == "City":
+            new_instance = City()
+        elif line == "Amenity":
+            new_instance = Amenity()
+        elif line == "Review":
+            new_instance = Review()
+        new_instance.save()
+        print(new_instance.id)
+        
+   def do_show(self, line):
         """Prints the string representation of
         an instance based on the class name and id"""
         # First, separate in a list the commands by white space
@@ -86,6 +76,29 @@ def do_show(self, line):
                 # string representation of the instance with class name and id
                 print(obj[key])
 
+    def do_show(self, line):
+        try:
+            class_name, obj_id = line.split()
+            obj = storage.all()
+            if class_name + "." + obj_id in obj.keys():
+                print(obj[class_name + "." + obj_id])
+            else:
+                print("** no instance found **")
+        except:
+            print("** class name missing **")
+
+    def do_destroy(self, line):
+        try:
+            class_name, obj_id = line.split()
+            obj = storage.all()
+            if class_name + "." + obj_id in obj.keys():
+                del obj[class_name + "." + obj_id]
+                storage.save()
+            else:
+                print("** no instance found **")
+        except:
+            print("** class name missing **")
+            
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
         n = line.split()
@@ -106,25 +119,23 @@ def do_show(self, line):
                 storage.save()
 
     def do_all(self, line):
-        """Prints all string representation of
-        all instances based or not on the class name"""
-        n = line.split()
         obj_list = []
-        if len(n) == 0:
-            for value in storage.all().values():
-                obj_list.append(value.__str__())
-            print(obj_list)
-        elif (n[0] not in self.level):
-            print("** class doesn't exist **")
+        if line == "":
+            obj = storage.all().values()
+            for instance in obj:
+                obj_list.append(str(instance))
+            print("[" + ", ".join(obj_list) + "]")
         else:
-            for key, value in storage.all().items():
-                if n[0] in key:
-                    obj_list.append(storage.all()[key].__str__())
-                else:
-                    return
-            print(obj_list)
-
-    def do_update(self, line):
+            try:
+                obj = storage.all()
+                for key, value in obj.items():
+                    if key.split(".")[0] == line:
+                        obj_list.append(str(value))
+                print("[" + ", ".join(obj_list) + "]")
+            except:
+                print("** class doesn't exist **")
+                
+  def do_update(self, line):
         """Updates an instance based on the class name and id
         by adding or updating attribute (save the change into the JSON file)
         Usage: update <class name> <id> <attribute name> "<attribute value>"""
@@ -151,15 +162,29 @@ def do_show(self, line):
                 setattr(obj[key], n[2], n[3])
                 storage.save()
 
-    def do_count(self, line):
+
+    def do_update(self, line):
+        try:
+            class_name, obj_id, attr, value = line.split()
+            obj = storage.all()
+            if class_name + "." + obj_id in obj.keys():
+                setattr(obj[class_name + "." + obj_id], attr, value)
+                obj[class_name + "." + obj_id].save()
+            else:
+                print("** no instance found **")
+        except:
+            print("** class name missing **")
+            
+            
+   def do_count(self, line):
         """ retrieve the number of instances of a class """
         count = 0
         for key in storage.all().keys():
             if line in key:
                 count += 1
         print(count)
-
-    def default(self, line):
+            
+      def default(self, line):
         """ Retrieve instances based on methods, i.e. <class name>.all() """
         n = line.split('.')
         inst = n[0]
@@ -180,6 +205,8 @@ def do_show(self, line):
             sp = n[1].split('"')
             line = inst + ' ' + sp[1] + ' ' + sp[3] + ' ' + sp[5]
             self.do_update(line)
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
