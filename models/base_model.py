@@ -7,7 +7,6 @@ from datetime import datetime
 # import the variable storage
 import models
 
-
 class BaseModel:
     """Base class for other classes to inherit from."""
     def __init__(self, *args, **kwargs):
@@ -16,9 +15,10 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         models.storage.new(self)
-    if kwargs:
+        if kwargs:
             self._recreate_from_dict(kwargs)
             models.storage.new(self)
+
 
     def _recreate_from_dict(self, data):
         """Helper function to recreate the instance from a dictionary."""
