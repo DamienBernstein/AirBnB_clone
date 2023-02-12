@@ -42,15 +42,10 @@ class FileStorage:
             json.dump(ser_dict, f)
 
     def reload(self):
-<<<<<<< HEAD
-        """Deserializes the JSON file to __objects (only if the JSON file (__file_path) exists,
-        otherwise, do nothing. If the file doesn’t exist, no exception should be raised)"""
-=======
         """Deserializes the JSON file to __objects
         (only if the JSON file (__file_path) exists,
-        otherwise, do nothing. If the file doesn’t exist
-        , no exception should be raised)"""
->>>>>>> 3d6a52a032bbdbccd46fd1a87bf94848f25f9d4c
+        otherwise, do nothing. If the file doesn’t exist,
+        no exception should be raised)"""
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r') as f:
                 des_json = json.load(f)
