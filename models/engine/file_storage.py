@@ -17,12 +17,12 @@ class FileStorage:
 
     def all(self):
         return FileStorage.__objects
+# in the User class
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        models.storage.new(self.__class__.__name__, self)
 
-    def new(self, cls, obj):
-        key = cls.__name__ + "." + obj.id
-        self.__objects[key] = obj
 
-      
 
     def save(self):
         with open(FileStorage.__file_path, 'w') as f:
