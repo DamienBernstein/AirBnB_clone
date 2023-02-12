@@ -10,57 +10,11 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
-# models/engine/file_storage.py
-import json
-from models.base_model import BaseModel
-from models.user import User
-
-
-
 
 class FileStorage:
-    FILE_PATH = "file.json"
-    OBJECTS = {}
-    LABEL_DICT = {
-        "BaseModel": BaseModel,
-        "User": User,
-        "Amenity": Amenity,
-        "City": City,
-        "Place": Place,
-        "State": State,
-        "Review": Review
-    }
+    __file_path = "file.json"
+    __objects = {}
 
-    def all(self):
-        return self.OBJECTS
-
-    def new(self, obj):
-        if obj:
-            key = "{}.{}".format(type(obj).__name__, obj.id)
-            self.OBJECTS[key] = obj
-
-    def save(self):
-        serialized_dict = {}
-        for value in self.OBJECTS.values():
-            key = "{}.{}".format(type(value).__name__, value.id)
-            serialized_dict[key] = value.to_dict()
-        
-        with open(self.FILE_PATH, 'w') as f:
-            json.dump(serialized_dict, f)
-
-    def reload(self):
-        if os.path.isfile(self.FILE_PATH):
-            with open(self.FILE_PATH, 'r') as f:
-                deserialized_json = json.load(f)
-                for key, value in deserialized_json.items():
-                    class_name, _, obj_id = key.rpartition('.')
-                    cls = self.LABEL_DICT.get(class_name)
-                    if cls:
-                        obj = cls(**value)
-                        obj.id = obj_id
-                        self.new(obj)
-                        
- 
     def all(self):
         return FileStorage.__objects
 
@@ -84,5 +38,16 @@ class FileStorage:
                         FileStorage.__objects[key] = BaseModel(**value)
                     elif class_name == "User":
                         FileStorage.__objects[key] = User(**value)
+                    elif class_name == "Place":
+                        FileStorage.__objects[key] = Place(**value)
+                    elif class_name == "State":
+                        FileStorage.__objects[key] = State(**value)
+                    elif class_name == "City":
+                        FileStorage.__objects[key] = City(**value)
+                    elif class_name == "Amenity":
+                        FileStorage.__objects[key] = Amenity(**value)
+                    elif class_name == "Review":
+                        FileStorage.__objects[key] = Review(**value)
         except:
             pass
+
