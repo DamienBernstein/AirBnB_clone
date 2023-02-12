@@ -37,6 +37,10 @@ class TestFileStorage(unittest.TestCase):
         except FileNotFoundError:
             pass
 
+        tidus = tidus() # create an instance of the Tidus class
+        file_storage = FileStorage()
+        file_storage.new(tidus.__class__.__name__, tidus)
+
     # test the new method of the file storage class
     def test_new_method(self):
         # initialize the file storage object
@@ -46,18 +50,13 @@ class TestFileStorage(unittest.TestCase):
         # create a user object
         tidus = User()
         tidus.id = 999999
-        tidus.name = "Tidus"
+        tidus.name = "tidus"
         # add the user object to the file storage
         file_storage.new(tidus)
         # generate the key that should be used to access the user object in the dictionary of instances
         key = tidus.__class__.__name__ + "." + str(tidus.id)
         # check if the key is present in the dictionary of instances
         self.assertIn(key, instances_dict)
-
-
-        tidus = Tidus() # create an instance of the Tidus class
-        file_storage = FileStorage()
-        file_storage.new(tidus.__class__.__name__, tidus)
 
     # test the all method of the file storage class
     def test_all_method(self):

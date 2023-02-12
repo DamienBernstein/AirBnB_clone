@@ -2,6 +2,7 @@
 
 """Unittest BaseModel"""
 
+import dataclasses
 import unittest
 import os
 import uuid
@@ -19,7 +20,7 @@ class TestBaseModel(unittest.TestCase):
     # in tests/test_models/test_base_model.py
     def test_recreate_from_dict(self):
         # ...
-        recreated_base_model = BaseModel(**data)
+        recreated_base_model = BaseModel(**dataclasses)
     
     def test_recreate_from_dict(self):
         base_model = BaseModel()
