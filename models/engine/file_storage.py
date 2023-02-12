@@ -61,7 +61,7 @@ class FileStorage:
                         self.new(obj)
                         
  
-  def all(self):
+    def all(self):
         return FileStorage.__objects
 
     def new(self, obj):
