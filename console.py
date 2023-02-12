@@ -12,14 +12,12 @@ from models.engine.file_storage import FileStorage
 from models import storage
 
 
-
 class HBNBCommand(cmd.Cmd):
-                              
+
     """ init Command Prompt """
     prompt = "(hbnb) "
     level = ["BaseModel", "City", "State",
              "User", "Place", "Review", "Amenity"]
-     
 
     def do_EOF(self, args):
         """CTRl-D to exit\n"""
@@ -51,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance = Review()
         new_instance.save()
         print(new_instance.id)
-        
+
     def do_show(self, line):
         """Prints the string representation of
         an instance based on the class name and id"""
@@ -85,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
                 print(obj[class_name + "." + obj_id])
             else:
                 print("** no instance found **")
-        except:
+        except BaseException:
             print("** class name missing **")
 
     def do_destroy(self, line):
@@ -97,9 +95,9 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
-        except:
+        except BaseException:
             print("** class name missing **")
-            
+
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
         n = line.split()
@@ -133,9 +131,9 @@ class HBNBCommand(cmd.Cmd):
                     if key.split(".")[0] == line:
                         obj_list.append(str(value))
                 print("[" + ", ".join(obj_list) + "]")
-            except:
+            except BaseException:
                 print("** class doesn't exist **")
-                
+
     def do_update(self, line):
         """Updates an instance based on the class name and id
         by adding or updating attribute (save the change into the JSON file)
@@ -163,7 +161,6 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj[key], n[2], n[3])
                 storage.save()
 
-
     def do_update(self, line):
         try:
             class_name, obj_id, attr, value = line.split()
@@ -173,10 +170,9 @@ class HBNBCommand(cmd.Cmd):
                 obj[class_name + "." + obj_id].save()
             else:
                 print("** no instance found **")
-        except:
+        except BaseException:
             print("** class name missing **")
-            
-            
+
     def do_count(self, line):
         """ retrieve the number of instances of a class """
         count = 0
@@ -184,7 +180,7 @@ class HBNBCommand(cmd.Cmd):
             if line in key:
                 count += 1
         print(count)
-            
+
     def default(self, line):
         """ Retrieve instances based on methods, i.e. <class name>.all() """
         n = line.split('.')
@@ -206,7 +202,6 @@ class HBNBCommand(cmd.Cmd):
             sp = n[1].split('"')
             line = inst + ' ' + sp[1] + ' ' + sp[3] + ' ' + sp[5]
             self.do_update(line)
-
 
 
 if __name__ == '__main__':
