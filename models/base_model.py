@@ -1,54 +1,49 @@
 #!/usr/bin/python3
-
-
 """ Base module """
 import uuid
 from datetime import datetime
-# import the variable storage
 import models
 
+
 class BaseModel:
-    """Base class for other classes to inherit from."""
+    """ class for all other classes to inherit from """
     def __init__(self, *args, **kwargs):
-        """Initializes a new instance of the class."""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        models.storage.new(self)
+        """ Constructor and re-create an instance with
+        this dictionary representation"""
         if kwargs:
-            self._recreate_from_dict(kwargs)
+            for key, value in kwargs.items():
+                if key == "updated_at" or key == "created_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "__class__":
+                    continue
+                setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             models.storage.new(self)
 
-
-    def _recreate_from_dict(self, data):
-        """Helper function to recreate the instance from a dictionary."""
-        for key, value in data.items():
-            if key == "updated_at":
-                value = datetime.fromisoformat(value)
-            elif key == "created_at":
-                value = datetime.fromisoformat(value)
-            elif key == "__class__":
-                continue
-
-            setattr(self, key, value)
-
     def __str__(self):
-        """Return a custom string representation of the object."""
+        """ overriding the __str__ method that returns a custom
+        string object """
         class_name = type(self).__name__
-        return f"[{class_name}] ({self.id}) {self.__dict__}"
+        mssg = f"[{class_name}] ({self.id}) {self.__dict__}"
+        return mssg
 
     def save(self):
-        """Save the current state of the object to the file."""
+        """ updates the public instance attribute updated_at with
+        the current datetime """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Return a dictionary containing all keys/values of __dict__ of the instance."""
+        """returns a dictionary containing all keys/values
+        of __dict__ of the instance."""
         tdic = {}
         tdic["__class__"] = type(self).__name__
-        for n, i in self.__dict__.items():
-            if isinstance(i, datetime):
-                tdic[n] = i.isoformat()
+        for attr, value in self.__dict__.items():
+            if isinstance(value, datetime):
+                tdic[attr] = value.isoformat()
             else:
-                tdic[n] = i
+                tdic[attr] = value
         return tdic
