@@ -6,15 +6,20 @@ import uuid
 from datetime import datetime
 # import the variable storage
 import models
-from .filestorage import storage
 
 
 class BaseModel:
+    """Base class for other classes to inherit from."""
     def __init__(self, *args, **kwargs):
+        """Initializes a new instance of the class."""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
-        self.updated_at = self.created_at
-        storage.new(self)
+        self.updated_at = datetime.now()
+        models.storage.new(self)
+        
+     if kwargs:
+            self._recreate_from_dict(kwargs)
+            models.storage.new(self)
 
     def _recreate_from_dict(self, data):
         """Helper function to recreate the instance from a dictionary."""
