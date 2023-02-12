@@ -8,6 +8,7 @@ from models.amenity import Amenity
 from models.city import City
 from models.review import Review
 from models.place import Place
+from models.engine.file_storage import FileStorage
 from models import storage
 
 
@@ -16,6 +17,20 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     level = ["BaseModel", "City", "State",
              "User", "Place", "Review", "Amenity"]
+
+    def do_create(self, line):
+        if line == "BaseModel":
+            new_instance = BaseModel()
+        elif line == "User":
+            new_instance = User()
+        new_instance.save()
+        print(new_instance.id)
+
+    def do_show(self, line):
+        try:
+            class_name, obj_id = line.split()
+            obj = storage.
+
 
     def do_EOF(self, args):
         """CTRl-D to exit\n"""
