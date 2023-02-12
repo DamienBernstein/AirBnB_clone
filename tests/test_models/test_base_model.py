@@ -15,12 +15,18 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base_model.id, str)
         self.assertIsInstance(base_model.created_at, datetime)
         self.assertIsInstance(base_model.updated_at, datetime)
+        
+    # in tests/test_models/test_base_model.py
+    def test_recreate_from_dict(self):
+        # ...
+        recreated_base_model = BaseModel(**data)
     
     def test_recreate_from_dict(self):
         base_model = BaseModel()
         data = base_model.to_dict()
         recreated_base_model = BaseModel(**data)
         self.assertEqual(recreated_base_model.to_dict(), data)
+        
         
     def test_str(self):
         base_model = BaseModel()
