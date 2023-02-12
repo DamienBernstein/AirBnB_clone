@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ First User in AirBnB Project """
 from .base_model import BaseModel
+from models.base_model import BaseModel
 
 
 class User(BaseModel):
@@ -10,21 +11,16 @@ class User(BaseModel):
     email = ''
     password = ''
 
-    # console.py
-from models.base_model import BaseModel
-from models.user import User
-from models.engine.file_storage import FileStorage
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-class Console:
-    def do_create(self, line):
-        if line == "BaseModel":
-            new_instance = BaseModel()
-        elif line == "User":
-            new_instance = User()
-        new_instance.save()
-        print(new_instance.id)
+    def __str__(self):
+        return "[User] ({}) {}".format(self.id, self.__dict__)
 
-    def do_show(self, line):
-        try:
-            class_name, obj_id = line.split()
-            obj = storage.
+    def to_dict(self):
+        user_dict = super().to_dict()
+        user_dict["email"] = self.email
+        user_dict["password"] = self.password
+        user_dict["first_name"] = self.first_name
+        user_dict["last_name"] = self.last_name
+        return user_dict
