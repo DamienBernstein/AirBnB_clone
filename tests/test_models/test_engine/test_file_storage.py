@@ -37,11 +37,11 @@ class TestFileStorage(unittest.TestCase):
         except FileNotFoundError:
             pass
         
-     class Tidus:
+    class Tidus:
            pass
 
-     def tearDownClass():
-         tidus = Tidus() # create an instance of the Tidus class
+    def tearDownClass():
+         tidus = tidus() # create an instance of the Tidus class
          file_storage = FileStorage()
          file_storage.new(tidus.__class__.__name__, tidus)
 
