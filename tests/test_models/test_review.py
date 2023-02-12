@@ -10,6 +10,8 @@ from models.review import Review
 from models.base_model import BaseModel
 
 # Test class for Review model
+
+
 class TestReview(unittest.TestCase):
 
     # Setup method to initialize a Review object
@@ -20,7 +22,8 @@ class TestReview(unittest.TestCase):
         cls.review.place_id = "lalalanda"
         cls.review.text = "I'll be back"
 
-    # Tear down method to delete the Review object and remove the file if exists
+    # Tear down method to delete the Review object and remove the file if
+    # exists
     @classmethod
     def tearDownClass(cls):
         del cls.review
@@ -60,6 +63,7 @@ class TestReview(unittest.TestCase):
         self.assertEqual(type(self.review.text), str)
         self.assertEqual(type(self.review.place_id), str)
         self.assertEqual(type(self.review.user_id), str)
+
 
 # Main block to run the tests
 if __name__ == "__main__":

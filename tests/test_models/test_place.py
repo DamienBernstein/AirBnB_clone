@@ -5,6 +5,7 @@ import os
 from models.user import User
 from models.base_model import BaseModel
 
+
 class TestUser(unittest.TestCase):
     """Test case for the User model"""
 
@@ -59,6 +60,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(type(self.user.password), str)
         self.assertEqual(type(self.user.first_name), str)
         self.assertEqual(type(self.user.last_name), str)
+
 
 if __name__ == "__main__":
     unittest.main()

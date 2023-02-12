@@ -9,6 +9,7 @@ import os
 from models.city import City
 from models.base_model import BaseModel
 
+
 class TestCity(unittest.TestCase):
     """Test class for the City model"""
 
@@ -57,6 +58,7 @@ class TestCity(unittest.TestCase):
         """Test to check if the name and state_id attributes are strings"""
         self.assertIsInstance(self.city1.name, str)
         self.assertIsInstance(self.city1.state_id, str)
+
 
 if __name__ == "__main__":
     unittest.main()

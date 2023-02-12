@@ -16,9 +16,10 @@ from models.user import User
 from models.engine.file_storage import FileStorage
 
 # class that tests the file storage class
+
+
 class TestFileStorage(unittest.TestCase):
-    
-   
+
     # setup method to initialize the review object before running tests
     @classmethod
     def setUpClass(cls):
@@ -36,10 +37,9 @@ class TestFileStorage(unittest.TestCase):
             os.remove("file.json")
         except FileNotFoundError:
             pass
-        
-    
 
     # test the new method of the file storage class
+
     def test_new_method(self):
         # initialize the file storage object
         file_storage = FileStorage()
@@ -51,7 +51,8 @@ class TestFileStorage(unittest.TestCase):
         tidus.name = "tidus"
         # add the user object to the file storage
         file_storage.new(tidus)
-        # generate the key that should be used to access the user object in the dictionary of instances
+        # generate the key that should be used to access the user object in the
+        # dictionary of instances
         key = tidus.__class__.__name__ + "." + str(tidus.id)
         # check if the key is present in the dictionary of instances
         self.assertIn(key, instances_dict)
@@ -64,7 +65,8 @@ class TestFileStorage(unittest.TestCase):
         instances_dict = file_storage.all()
         # check if the returned value is a dictionary
         self.assertIsInstance(instances_dict, dict)
-        # check if the returned value is equal to the __objects attribute of the file storage object
+        # check if the returned value is equal to the __objects attribute of
+        # the file storage object
         self.assertEqual(instances_dict, file_storage._FileStorage__objects)
 
     # test the reload method of the file storage class
@@ -74,7 +76,7 @@ class TestFileStorage(unittest.TestCase):
         # try to remove the file.json file
         try:
             os.remove("file.json")
-        except:
+        except BaseException:
             pass
         # create an empty file.json file
         with open("file.json", mode="w") as f:
@@ -82,7 +84,7 @@ class TestFileStorage(unittest.TestCase):
         # check if the reload method returns None
         self.assertIsNone(file_storage.reload())
 
+
 # if this module is run as the main module, run the tests
 if __name__ == "__main__":
     unittest.main()
-

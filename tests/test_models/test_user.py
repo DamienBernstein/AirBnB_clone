@@ -8,6 +8,8 @@ from models.user import User
 from models.base_model import BaseModel
 
 # Test case class for User model
+
+
 class TestUser(unittest.TestCase):
 
     # Set up method that runs before each test case
@@ -52,14 +54,13 @@ class TestUser(unittest.TestCase):
         self.assertIn("updated_at", self.my_user.__dict__)
         self.assertIn("id", self.my_user.__dict__)
 
-   
     # Test the types of the attributes of the User model
+
     def test_types(self):
         self.assertIsInstance(self.my_user.email, str)
         self.assertIsInstance(self.my_user.password, str)
         self.assertIsInstance(self.my_user.first_name, str)
         self.assertIsInstance(self.my_user.last_name, str)
-
 
 
 # Run the tests if this script is executed as main

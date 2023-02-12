@@ -29,13 +29,17 @@ class TestAmenity(unittest.TestCase):
 
     # test method to check if the to_dict method exists
     def test_to_dict(self):
-        self.assertTrue("to_dict" in dir(self.amenity1), "to_dict method not found")
+        self.assertTrue(
+            "to_dict" in dir(
+                self.amenity1),
+            "to_dict method not found")
 
     # test method to check if the class has a __doc__ string
     def test_functions(self):
         self.assertIsNotNone(Amenity.__doc__, "__doc__ string not found")
 
-    # test method to check if the save method updates the created_at and updated_at attributes
+    # test method to check if the save method updates the created_at and
+    # updated_at attributes
     def test_save(self):
         self.amenity1.save()
         self.assertNotEqual(self.amenity1.created_at, self.amenity1.updated_at,
@@ -46,16 +50,27 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(issubclass(self.amenity1.__class__, BaseModel),
                         "Amenity is not a subclass of BaseModel")
 
-    # test method to check if the required attributes exist in the Amenity class
+    # test method to check if the required attributes exist in the Amenity
+    # class
     def test_attributes(self):
-        self.assertIn("name", self.amenity1.__dict__, "name attribute not found")
-        self.assertIn("created_at", self.amenity1.__dict__, "created_at attribute not found")
-        self.assertIn("updated_at", self.amenity1.__dict__, "updated_at attribute not found")
+        self.assertIn(
+            "name",
+            self.amenity1.__dict__,
+            "name attribute not found")
+        self.assertIn(
+            "created_at",
+            self.amenity1.__dict__,
+            "created_at attribute not found")
+        self.assertIn(
+            "updated_at",
+            self.amenity1.__dict__,
+            "updated_at attribute not found")
         self.assertIn("id", self.amenity1.__dict__, "id attribute not found")
 
     # test method to check if the name attribute is a string
     def test_strings(self):
         self.assertEqual(type(self.amenity1.name), str, "name is not a string")
+
 
 # run the tests if the module is executed as the main module
 if __name__ == "__main__":
