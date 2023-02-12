@@ -17,6 +17,11 @@ from models.engine.file_storage import FileStorage
 
 # class that tests the file storage class
 class TestFileStorage(unittest.TestCase):
+    
+   tidus = Tidus() # create an instance of the Tidus class
+   file_storage = FileStorage()
+   file_storage.new(Tidus, tidus)
+
 
     # setup method to initialize the review object before running tests
     @classmethod
