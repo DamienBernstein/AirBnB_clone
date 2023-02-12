@@ -26,10 +26,13 @@ class HBNBCommand(cmd.Cmd):
         new_instance.save()
         print(new_instance.id)
 
-    def do_show(self, line):
-        try:
-            class_name, obj_id = line.split()
-            obj = storage.
+def do_show(self, line):
+    try:
+        class_name, obj_id = line.split()
+        obj = storage.all()[class_name + "." + obj_id]
+        print(obj)
+    except:
+        print("Error: no instance found")
 
 
     def do_EOF(self, args):
