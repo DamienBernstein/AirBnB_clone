@@ -13,7 +13,8 @@ from models.review import Review
 
 
 class FileStorage:
-    """Serializes instances to a JSON file and deserializes JSON file to instances"""
+    """Serializes instances to a JSON file and
+    deserializes JSON file to instances"""
     __file_path = "file.json"
     __objects = {}
     class_map = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
@@ -41,8 +42,10 @@ class FileStorage:
             json.dump(ser_dict, f)
 
     def reload(self):
-        """Deserializes the JSON file to __objects (only if the JSON file (__file_path) exists, 
-        otherwise, do nothing. If the file doesn’t exist, no exception should be raised)"""
+        """Deserializes the JSON file to __objects
+        (only if the JSON file (__file_path) exists,
+        otherwise, do nothing. If the file doesn’t exist
+        , no exception should be raised)"""
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r') as f:
                 des_json = json.load(f)
