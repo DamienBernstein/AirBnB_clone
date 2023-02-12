@@ -14,11 +14,12 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
+                              
     """ init Command Prompt """
     prompt = "(hbnb) "
     level = ["BaseModel", "City", "State",
              "User", "Place", "Review", "Amenity"]
-)
+     
 
     def do_EOF(self, args):
         """CTRl-D to exit\n"""
@@ -51,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
         new_instance.save()
         print(new_instance.id)
         
-   def do_show(self, line):
+    def do_show(self, line):
         """Prints the string representation of
         an instance based on the class name and id"""
         # First, separate in a list the commands by white space
@@ -135,7 +136,7 @@ class HBNBCommand(cmd.Cmd):
             except:
                 print("** class doesn't exist **")
                 
-  def do_update(self, line):
+    def do_update(self, line):
         """Updates an instance based on the class name and id
         by adding or updating attribute (save the change into the JSON file)
         Usage: update <class name> <id> <attribute name> "<attribute value>"""
@@ -176,7 +177,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             
             
-   def do_count(self, line):
+    def do_count(self, line):
         """ retrieve the number of instances of a class """
         count = 0
         for key in storage.all().keys():
@@ -184,7 +185,7 @@ class HBNBCommand(cmd.Cmd):
                 count += 1
         print(count)
             
-      def default(self, line):
+    def default(self, line):
         """ Retrieve instances based on methods, i.e. <class name>.all() """
         n = line.split('.')
         inst = n[0]

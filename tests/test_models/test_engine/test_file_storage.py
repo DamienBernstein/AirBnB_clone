@@ -18,11 +18,7 @@ from models.engine.file_storage import FileStorage
 # class that tests the file storage class
 class TestFileStorage(unittest.TestCase):
     
-      tidus = Tidus() # create an instance of the Tidus class
-      file_storage = FileStorage()
-      file_storage.new(Tidus, tidus)
-
-
+   
     # setup method to initialize the review object before running tests
     @classmethod
     def setUpClass(cls):
@@ -57,6 +53,11 @@ class TestFileStorage(unittest.TestCase):
         key = tidus.__class__.__name__ + "." + str(tidus.id)
         # check if the key is present in the dictionary of instances
         self.assertIn(key, instances_dict)
+
+
+        tidus = Tidus() # create an instance of the Tidus class
+        file_storage = FileStorage()
+        file_storage.new(tidus.__class__.__name__, tidus)
 
     # test the all method of the file storage class
     def test_all_method(self):
