@@ -36,10 +36,14 @@ class TestFileStorage(unittest.TestCase):
             os.remove("file.json")
         except FileNotFoundError:
             pass
+        
+     class Tidus:
+           pass
 
-        tidus = tidus() # create an instance of the Tidus class
-        file_storage = FileStorage()
-        file_storage.new(tidus.__class__.__name__, tidus)
+     def tearDownClass():
+         tidus = Tidus() # create an instance of the Tidus class
+         file_storage = FileStorage()
+         file_storage.new(tidus.__class__.__name__, tidus)
 
     # test the new method of the file storage class
     def test_new_method(self):
