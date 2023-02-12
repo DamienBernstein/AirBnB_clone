@@ -49,4 +49,3 @@ class FileStorage:
                 obj_class = self.class_map.get(class_name)
                 if obj_class:
                     self.new(obj_class(**value))
-
