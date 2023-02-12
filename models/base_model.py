@@ -16,7 +16,6 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         models.storage.new(self)
-        
     if kwargs:
             self._recreate_from_dict(kwargs)
             models.storage.new(self)
