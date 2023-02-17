@@ -4,7 +4,7 @@
 
 .places h1 {
   font-size: 30px;
-  text-align: left;
+  text-align: Top left;
 }
 
 .places article {
@@ -17,5 +17,5 @@
 
 .places article h2 {
   font-size: 30px;
-  text-align: center;
+  text-align: center horizontal;
 }
