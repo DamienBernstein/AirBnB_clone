@@ -94,15 +94,60 @@
     text-align: left;
 }
 
-.amenities h2{
-    font-weight: 200;
-    font-size: 16px;
-    border-bottom: #DDDDDD 1px;
+/* 8-places.css */
+
+/* Amenities */
+.amenities {
     margin-top: 40px;
-    background-image: url(https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/icon_pets.png);
+  }
+  .amenities h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #DDDDDD;
+  }
+  .amenities ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .amenities ul li {
+    margin: 10px 0;
+    padding-left: 25px;
     background-repeat: no-repeat;
-    background-position: left;
-    display: inline-block;
-
-}
-
+    background-position: left center;
+    background-size: auto 50%;
+  }
+  .amenities ul li.pet-friendly {
+    background-image: url('images/pet-friendly.png');
+  }
+  .amenities ul li.tv {
+    background-image: url('images/tv.png');
+  }
+  .amenities ul li.wifi {
+    background-image: url('images/wifi.png');
+  }
+  /* Add more icons as needed */
+  
+  /* Reviews */
+  .reviews {
+    margin-top: 40px;
+  }
+  .reviews h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #DDDDDD;
+  }
+  .reviews ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .reviews ul li {
+    margin: 20px 0;
+  }
+  .reviews ul li h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .reviews ul li p {
+    font-size: 12px;
+  }
+  
