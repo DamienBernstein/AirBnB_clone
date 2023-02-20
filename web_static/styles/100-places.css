@@ -102,6 +102,7 @@
     background-image: url(https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/icon_pets.png);
     background-repeat: no-repeat;
     background-position: left;
+    display: inline-block;
 
 }
 
